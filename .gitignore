@@ -1,3 +1,7 @@
+_server.js
+static/_bundle.js
+cp.sh
+
 # Logs
 logs
 *.log

@@ -1,0 +1,14 @@
+# Clean up all containers and images.
+docker ps -a |grep hello_dev_c && docker rm -f hello_dev_c
+docker images |grep hello_dev_i && docker rmi hello_dev_i
+docker ps -a |grep hello_prod_c && docker rm -f hello_prod_c
+docker images |grep hello_prod_i && docker rmi hello_prod_i
+
+if [ "$1" = "prod" ]; then
+  echo "### Starting docker for production...\n"
+  docker build -t hello_prod_i .
+  docker run -d -p 3333:80 --name=hello_prod_c hello_prod_i
+else
+  echo "### Starting docker for dev...\n"
+  docker-compose up
+fi
